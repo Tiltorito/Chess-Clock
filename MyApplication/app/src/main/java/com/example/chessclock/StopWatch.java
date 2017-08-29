@@ -26,7 +26,11 @@ public class StopWatch {
      * Starts the StopWatch
      */
     public void start() {
-        if(thread.getState() == Thread.State.NEW || thread.getState() == Thread.State.TERMINATED) {
+        if(thread.getState() == Thread.State.NEW) {
+            thread.start();
+        }
+        else if(thread.getState() == Thread.State.TERMINATED) {
+            thread = new CountDownThread();
             thread.start();
         }
         else if(thread.isPaused()) {
