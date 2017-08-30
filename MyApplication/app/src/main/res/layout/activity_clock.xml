@@ -14,7 +14,8 @@
         android:layout_height="0dp"
         android:layout_weight="2"
         android:text=""
-        android:textSize="45sp" />
+        android:textSize="45sp"
+        android:rotation="180"/>
 
     <RelativeLayout
         android:layout_width="match_parent"

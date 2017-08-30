@@ -12,8 +12,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Intent intent = new Intent(this, ClockActivity.class);
-        intent.putExtra("first", 300000);
-        intent.putExtra("Second", 300000);
+        intent.putExtra("TIME_PER_PLAYER", 5000);
+        intent.putExtra("EXTRA_TIME_PER_MOVE", 5);
         startActivity(intent);
     }
 }

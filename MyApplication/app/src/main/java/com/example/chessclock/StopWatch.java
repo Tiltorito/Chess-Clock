@@ -111,6 +111,10 @@ public class StopWatch {
         addSeconds(minutes * 60);
     }
 
+    public void setTimeLeft(long timeLeft) {
+        this.mTimeLeft = timeLeft;
+    }
+
     private class CountDownThread extends Thread {
         private boolean paused;
 
@@ -144,6 +148,7 @@ public class StopWatch {
         public boolean isPaused() {
             return paused;
         }
+
     }
 }
 
