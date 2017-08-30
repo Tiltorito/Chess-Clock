@@ -22,30 +22,31 @@ public class ClockActivity extends AppCompatActivity {
     // The thread that updating the UI
     private UpdateButtonsThread updateThread;
 
-    private int EXTRA_TIME_PER_MOVE; // extra time per move in seconds
-    private int TIME_PER_PLAYER; //  time per player in milliseconds
-    private static boolean isFirstTime = true; // this value is used in order to not add extra time the first time.
+    private long EXTRA_TIME_PER_MOVE; // extra time per move in seconds
+    private long TIME_PER_PLAYER; //  time per player in milliseconds
+    private static boolean isFirstTime; // this value is used in order to not add extra time the first time.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clock);
 
+        isFirstTime = true;
+
         firstPlayerButton = (Button)findViewById(R.id.firstPlayerButton);
         secondPlayerButton = (Button)findViewById(R.id.secondPlayerButton);
 
         resetButton = (ImageView)findViewById(R.id.resetButton);
         menuButton = (ImageView)findViewById(R.id.menuButton);
-
         Intent intent = getIntent();
 
-        TIME_PER_PLAYER = intent.getIntExtra("TIME_PER_PLAYER", 300000);
+        TIME_PER_PLAYER = intent.getLongExtra("TIME_PER_PLAYER", 300000);
 
         // Setting up the clocks!
         firstPlayerWatch = new StopWatch(TIME_PER_PLAYER);
         secondPlayerWatch = new StopWatch(TIME_PER_PLAYER);
 
-        EXTRA_TIME_PER_MOVE = intent.getIntExtra("EXTRA_TIME_PER_MOVE",0);
+        EXTRA_TIME_PER_MOVE = intent.getLongExtra("EXTRA_TIME_PER_MOVE",0);
 
         updateThread = new UpdateButtonsThread();
         updateThread.start();
