@@ -12,9 +12,9 @@ public class ClockActivity extends AppCompatActivity {
 
     private Button firstPlayerButton;
     private Button secondPlayerButton;
-
-    private ImageView resetButton;
-    private ImageView menuButton;
+    private Button resetButton;
+    private Button menuButton;
+    private Button pauseButton;
 
     private StopWatch firstPlayerWatch;
     private StopWatch secondPlayerWatch;
@@ -35,9 +35,11 @@ public class ClockActivity extends AppCompatActivity {
 
         firstPlayerButton = (Button)findViewById(R.id.firstPlayerButton);
         secondPlayerButton = (Button)findViewById(R.id.secondPlayerButton);
+        pauseButton = (Button)findViewById(R.id.pauseButton);
+        pauseButton.setVisibility(View.INVISIBLE);
 
-        resetButton = (ImageView)findViewById(R.id.resetButton);
-        menuButton = (ImageView)findViewById(R.id.menuButton);
+        resetButton = (Button)findViewById(R.id.resetButton);
+        menuButton = (Button)findViewById(R.id.menuButton);
         Intent intent = getIntent();
 
         TIME_PER_PLAYER = intent.getLongExtra("TIME_PER_PLAYER", 300000);
@@ -55,16 +57,45 @@ public class ClockActivity extends AppCompatActivity {
         secondPlayerButton.setOnClickListener(new ClickListener(secondPlayerWatch, firstPlayerWatch, firstPlayerButton));
 
         resetButton.setOnClickListener(new ResetClickListener());
-
         menuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
         });
+
+        pauseButton.setOnClickListener(new PauseClickListener());
     }
 
-
+    private class PauseClickListener implements View.OnClickListener {
+        private boolean paused;
+        private boolean firstPlayerButtonStatus;
+        private boolean secondPlayerButtonStatus;
+        @Override
+        public void onClick(View view) {
+            paused = !paused;
+            if(paused) {
+                view.setBackgroundResource(R.drawable.ic_play_arrow_48dp);
+                firstPlayerWatch.stop();
+                secondPlayerWatch.stop();
+                firstPlayerButtonStatus = firstPlayerButton.isClickable();
+                secondPlayerButtonStatus = secondPlayerButton.isClickable();
+                firstPlayerButton.setClickable(false);
+                secondPlayerButton.setClickable(false);
+            }
+            else {
+                view.setBackgroundResource(R.drawable.ic_pause_48dp);
+                firstPlayerButton.setClickable(firstPlayerButtonStatus);
+                secondPlayerButton.setClickable(secondPlayerButtonStatus);
+                if(firstPlayerButtonStatus) {
+                    firstPlayerWatch.start();
+                }
+                else if(secondPlayerButtonStatus) {
+                    secondPlayerWatch.start();
+                }
+            }
+        }
+    }
     private class ResetClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
@@ -107,11 +138,12 @@ public class ClockActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             if(view.isEnabled()) {
-                if(!isFirstTime) {
-                    myStopWatch.addSeconds(EXTRA_TIME_PER_MOVE);
+                if(isFirstTime) {
+                    isFirstTime = false;
+                    pauseButton.setVisibility(View.VISIBLE);
                 }
                 else {
-                    isFirstTime = false;
+                    myStopWatch.addSeconds(EXTRA_TIME_PER_MOVE);
                 }
                 myStopWatch.stop();
                 view.setEnabled(false);

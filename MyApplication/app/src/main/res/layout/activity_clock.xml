@@ -22,24 +22,32 @@
         android:layout_height="0dp"
         android:layout_weight="1">
 
-        <ImageView
+
+        <Button
             android:id="@+id/menuButton"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            app:srcCompat="@drawable/ic_menu_48dp"
-            android:layout_marginStart="72dp"/>
+            android:background="@drawable/ic_menu_48dp"
+            android:layout_marginStart="32dp"/>
 
+        <Button
+            android:id="@+id/pauseButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/ic_pause_48dp"
+            />
 
-        <ImageView
+        <Button
             android:id="@+id/resetButton"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="72dp"
-            app:srcCompat="@drawable/ic_repeat_48dp" />
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/ic_repeat_48dp" />
 
 
     </RelativeLayout>
