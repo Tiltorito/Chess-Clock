@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         list.add(new ChessMode("Delay Bullet",1,0,2));
 
         listView.setAdapter(new CustomArrayAdapter(this,list));
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {

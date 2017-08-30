@@ -27,19 +27,20 @@ public class CustomArrayAdapter extends ArrayAdapter<ChessMode> {
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if(convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(
+        View theView = convertView;
+        if(theView == null) {
+            theView = LayoutInflater.from(getContext()).inflate(
                     R.layout.list_item, parent, false);
         }
 
         ChessMode chessMode = getItem(position);
 
-        TextView titleTextView = convertView.findViewById(R.id.titleTextView);
-        TextView timeTextView = convertView.findViewById(R.id.timeTextView);
+        TextView titleTextView = theView.findViewById(R.id.titleTextView);
+        TextView timeTextView = theView.findViewById(R.id.timeTextView);
 
         titleTextView.setText(chessMode.getTitle());
         timeTextView.setText(chessMode.getTimeToString());
 
-        return convertView;
+        return theView;
     }
 }

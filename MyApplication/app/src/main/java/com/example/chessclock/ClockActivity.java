@@ -1,14 +1,12 @@
 package com.example.chessclock;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.support.v7.view.menu.ExpandedMenuView;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 
-public class ClockActivity extends AppCompatActivity {
+public class ClockActivity extends FragmentActivity {
 
     private Button firstPlayerButton;
     private Button secondPlayerButton;
@@ -18,6 +16,8 @@ public class ClockActivity extends AppCompatActivity {
 
     private StopWatch firstPlayerWatch;
     private StopWatch secondPlayerWatch;
+
+    private boolean paused;
 
     // The thread that updating the UI
     private UpdateButtonsThread updateThread;
@@ -48,7 +48,7 @@ public class ClockActivity extends AppCompatActivity {
         firstPlayerWatch = new StopWatch(TIME_PER_PLAYER);
         secondPlayerWatch = new StopWatch(TIME_PER_PLAYER);
 
-        EXTRA_TIME_PER_MOVE = intent.getLongExtra("EXTRA_TIME_PER_MOVE",0);
+        EXTRA_TIME_PER_MOVE = intent.getLongExtra("EXTRA_TIME_PER_MOVE", 0);
 
         updateThread = new UpdateButtonsThread();
         updateThread.start();
@@ -68,9 +68,7 @@ public class ClockActivity extends AppCompatActivity {
     }
 
     private class PauseClickListener implements View.OnClickListener {
-        private boolean paused;
         private boolean firstPlayerButtonStatus;
-        private boolean secondPlayerButtonStatus;
         @Override
         public void onClick(View view) {
             paused = !paused;
@@ -78,20 +76,23 @@ public class ClockActivity extends AppCompatActivity {
                 view.setBackgroundResource(R.drawable.ic_play_arrow_48dp);
                 firstPlayerWatch.stop();
                 secondPlayerWatch.stop();
-                firstPlayerButtonStatus = firstPlayerButton.isClickable();
-                secondPlayerButtonStatus = secondPlayerButton.isClickable();
-                firstPlayerButton.setClickable(false);
-                secondPlayerButton.setClickable(false);
+                firstPlayerButtonStatus = firstPlayerButton.isEnabled();
+                if(firstPlayerButtonStatus) { // if it's enabled
+                    firstPlayerButton.setClickable(false);
+                }
+                else { // if not first player's button is enabled is on the second.
+                    secondPlayerButton.setClickable(false);
+                }
             }
             else {
                 view.setBackgroundResource(R.drawable.ic_pause_48dp);
-                firstPlayerButton.setClickable(firstPlayerButtonStatus);
-                secondPlayerButton.setClickable(secondPlayerButtonStatus);
                 if(firstPlayerButtonStatus) {
                     firstPlayerWatch.start();
+                    firstPlayerButton.setClickable(true);
                 }
-                else if(secondPlayerButtonStatus) {
+                else {
                     secondPlayerWatch.start();
+                    secondPlayerButton.setClickable(true);
                 }
             }
         }
@@ -99,6 +100,14 @@ public class ClockActivity extends AppCompatActivity {
     private class ResetClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
+            // if it was paused, un-paused it
+            if(paused) {
+                pauseButton.callOnClick();
+            }
+
+            // hide the pause button
+            pauseButton.setVisibility(View.INVISIBLE);
+
             // stopping the watches
             firstPlayerWatch.stop();
             secondPlayerWatch.stop();
