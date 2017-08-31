@@ -17,8 +17,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ClockActivity"
-            android:theme="@style/AppThemeNoActionBar">
+            android:name=".ClockActivity">
         </activity>
     </application>
 
