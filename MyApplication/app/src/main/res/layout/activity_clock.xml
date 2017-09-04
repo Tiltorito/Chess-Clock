@@ -22,31 +22,38 @@
         android:layout_weight="1">
 
 
-        <Button
+        <ImageView
             android:id="@+id/menuButton"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:background="@drawable/ic_menu_48dp"
-            android:layout_marginStart="32dp"/>
+            android:src="@drawable/ic_menu_48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:layout_marginStart="32dp"
+            android:clickable="true"
+            />
 
-        <Button
+        <ImageView
             android:id="@+id/pauseButton"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_centerInParent="true"
-            android:background="@drawable/ic_pause_48dp"
+            android:src="@drawable/ic_pause_48dp"
+            android:clickable="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
             />
 
-        <Button
+        <ImageView
             android:id="@+id/resetButton"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="32dp"
-            android:background="@drawable/ic_repeat_48dp" />
+            android:src="@drawable/ic_repeat_48dp"
+            android:clickable="true"
+            android:background="?attr/selectableItemBackgroundBorderless"/>
 
 
     </RelativeLayout>

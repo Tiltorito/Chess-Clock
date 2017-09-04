@@ -19,14 +19,15 @@
             style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse"/>
 
         <ImageView
-            android:background="@color/colorPrimary"
+            android:background="?android:attr/selectableItemBackground"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:src="@drawable/ic_search_24dp"
-            style="@style/Widget.AppCompat.ActionButton"/>
+            style="@style/Widget.AppCompat.ActionButton"
+            />
 
         <ImageView
-            android:background="@color/colorPrimary"
+            android:background="?android:attr/selectableItemBackground"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:src="@drawable/ic_add_24dp"
