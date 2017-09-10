@@ -1,10 +1,12 @@
 package com.example.chessclock;
 
+import java.io.Serializable;
+
 /**
  * Created by Μπάμπης Μπιλλίνης on 30/8/2017.
  */
 
-public class ChessMode {
+public class ChessMode implements Serializable {
     private String title;
     private long minutes;
     private long seconds;

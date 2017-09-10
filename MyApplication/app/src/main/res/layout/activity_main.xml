@@ -7,15 +7,10 @@
     tools:context="com.example.chessclock.MainActivity"
     android:orientation="vertical">
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/tool_bar">
-    </include>
 
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawSelectorOnTop="true"
-        />
+        android:drawSelectorOnTop="true"/>
 </LinearLayout>

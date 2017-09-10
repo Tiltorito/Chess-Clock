@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Chess Clock</string>
+    <string name="edit_title">Edit</string>
+    <string name="delete_title">Delete</string>
+    <string name="add_title">Add new mode</string>
+    <string name="aboutus_title">About us</string>
 </resources>

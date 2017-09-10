@@ -3,6 +3,7 @@ package com.example.chessclock;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -60,6 +61,10 @@ public class ClockActivity extends FragmentActivity {
         menuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(updateThread != null) {
+                    updateThread.interrupt();
+                    updateThread = null;
+                }
                 finish();
             }
         });
@@ -76,8 +81,10 @@ public class ClockActivity extends FragmentActivity {
         super.onPause();
 
         // Kill the thread which updates the UI
-        updateThread.interrupt();
-        updateThread = null;
+        if(updateThread != null) {
+            updateThread.interrupt();
+            updateThread = null;
+        }
 
         // if the pause button was pressed, un-pause the game
         if(paused) {

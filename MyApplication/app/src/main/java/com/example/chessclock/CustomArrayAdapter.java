@@ -28,6 +28,7 @@ public class CustomArrayAdapter extends ArrayAdapter<ChessMode> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View theView = convertView;
+
         if(theView == null) {
             theView = LayoutInflater.from(getContext()).inflate(
                     R.layout.list_item, parent, false);
